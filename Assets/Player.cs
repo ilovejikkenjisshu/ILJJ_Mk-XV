@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager manager = new GameManager(this);
+    //    GameManager manager = new GameManager(this);
     }
 
     // Update is called once per frame
