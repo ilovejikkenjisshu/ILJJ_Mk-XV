@@ -9,7 +9,9 @@ public class GameManager
 
     public GameManager(Stage stage)
     {
+        /*
         players = stage.GetPlayers();
         squares = stage.GetSquares();
+        */
     }
 }
