@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class NormalSquare : Square
 {
-    public Square next;
+    public List<Square> next;
 
     public override Square GetNext(int index = 0)
     {
