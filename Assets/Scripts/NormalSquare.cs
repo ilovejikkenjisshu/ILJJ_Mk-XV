@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class NormalSquare : Square
 {
-    public List<Square> next;
+    public List<Square> nextSquares;
 
     public override Square GetNext(int index = 0)
     {
