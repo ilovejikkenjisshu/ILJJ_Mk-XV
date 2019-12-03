@@ -7,7 +7,8 @@ public class LoadSceneButton : MonoBehaviour
 {
     public string SceneName;
 
-    public void LoadTargetScene() {
-      SceneManager.LoadScene(SceneName);
+    public void LoadTargetScene()
+    {
+        SceneManager.LoadScene(SceneName);
     }
 }
