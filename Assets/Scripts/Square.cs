@@ -14,7 +14,7 @@ public abstract class Square : MonoBehaviour
             GameObject arrow = Instantiate(guideArrow,transform.position, Quaternion.identity);
             Vector3 diff = (sqr.transform.position - arrow.transform.position);
             arrow.transform.rotation = Quaternion.FromToRotation (Vector3.up, diff);
-            arrow.transform.position=Vector3.MoveTowards(arrow.transform.position,sqr.transform.position,1f);
+            arrow.transform.position = Vector3.MoveTowards(arrow.transform.position, sqr.transform.position, 1f);
         }
     }
 }
