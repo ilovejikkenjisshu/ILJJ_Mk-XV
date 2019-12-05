@@ -6,8 +6,7 @@ public abstract class Square : MonoBehaviour
 {
     public GameObject guideArrow;
     public abstract List<Square> GetNext();
-
-    protected virtual void Start()
+    private void GenerateGuideArrow()
     {
         foreach(Square sqr in GetNext())
         {
@@ -16,5 +15,9 @@ public abstract class Square : MonoBehaviour
             arrow.transform.rotation = Quaternion.FromToRotation (Vector3.up, diff);
             arrow.transform.position = Vector3.MoveTowards(arrow.transform.position, sqr.transform.position, 1f);
         }
+    }
+    protected virtual void Start()
+    {
+        GenerateGuideArrow();
     }
 }
