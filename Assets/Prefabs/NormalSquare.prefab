@@ -105,5 +105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6382a0c2320274a93a9c70f3acad5466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  next:
-  - {fileID: 0}
+  guideArrow: {fileID: 1957348707440546336, guid: e73c983b69a974746a26edb83a1cbc08,
+    type: 3}
+  nextSquares: []

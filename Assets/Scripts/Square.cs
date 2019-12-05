@@ -4,5 +4,17 @@ using UnityEngine;
 
 public abstract class Square : MonoBehaviour
 {
-    public abstract Square GetNext(int index = 0);
+    public GameObject guideArrow;
+    public abstract List<Square> GetNext();
+
+    protected virtual void Start()
+    {
+        foreach(Square s in GetNext())
+        {
+            GameObject arrow = Instantiate(guideArrow,transform.position, Quaternion.identity);
+            Vector3 diff = (s.transform.position - arrow.transform.position);
+            arrow.transform.rotation = Quaternion.FromToRotation (Vector3.up, diff);
+            arrow.transform.position=Vector3.MoveTowards(arrow.transform.position,s.transform.position,1f);
+        }
+    }
 }

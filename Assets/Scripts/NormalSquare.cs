@@ -5,15 +5,15 @@ public class NormalSquare : Square
 {
     public List<Square> nextSquares;
 
-    public override Square GetNext(int index = 0)
+    public override List<Square> GetNext()
     {
-        throw new System.NotImplementedException();
+        return nextSquares;
     }
 
     // Use this for initialization
-    void Start()
+    protected override void Start()
     {
-        
+        base.Start();
     }
 
     // Update is called once per frame
