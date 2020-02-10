@@ -21,7 +21,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
     void Start()
     {
         GameManager manager = new GameManager(this);
-        manager.GameCoroutine();
+        StartCoroutine(manager.GameCoroutine());
         Debug.Log("Game Initialization finished");
     }
 
