@@ -8,19 +8,19 @@ public class GameManager
     private Square[] squares;
     private Stage stage;
 
-    public GameManager(Stage _stage)
+    public GameManager(Stage stage)
     {
-        stage = _stage;
+        this.stage = stage;
         /*
         players = stage.GetPlayers();
         squares = stage.GetSquares();
         */
     }
 
-    public IEnumerator GameCoroutine()
+    public IEnumerator Run()
     {
         //READY!ボタンが押されるまで待つ
-        yield return stage.WaitForGetReady();
+        yield return stage.WaitForGettingReady();
 
         /*
         while(ゲーム終了まで){

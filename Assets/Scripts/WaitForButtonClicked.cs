@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WaitForButtonClick : CustomYieldInstruction
+public class WaitForButtonClicked : CustomYieldInstruction
 {
     private bool clicked;
 
@@ -12,7 +12,7 @@ public class WaitForButtonClick : CustomYieldInstruction
         get { return !clicked; }
     }
 
-    public WaitForButtonClick(Button waitButton)
+    public WaitForButtonClicked(Button waitButton)
     {
         clicked = false;
         waitButton.onClick.AddListener(OnClickButton);

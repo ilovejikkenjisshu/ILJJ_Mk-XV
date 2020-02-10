@@ -21,15 +21,15 @@ public class SimpleStageManager : MonoBehaviour, Stage
     void Start()
     {
         GameManager manager = new GameManager(this);
-        StartCoroutine(manager.GameCoroutine());
+        StartCoroutine(manager.Run());
         Debug.Log("Game Initialization finished");
     }
 
-    public IEnumerator WaitForGetReady()
+    public IEnumerator WaitForGettingReady()
     {
         readyPanel.SetActive(true);
         Button readyButton = readyPanel.transform.GetChild(0).transform.GetComponent<Button>();
-        yield return new WaitForButtonClick(readyButton);
+        yield return new WaitForButtonClicked(readyButton);
         readyPanel.SetActive(false);
     }
 }
