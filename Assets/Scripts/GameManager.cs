@@ -6,9 +6,11 @@ public class GameManager
 {
     private Player[] players;
     private Square[] squares;
+    private Stage stage;
 
-    public GameManager(Stage stage)
+    public GameManager(Stage _stage)
     {
+        stage = _stage;
         /*
         players = stage.GetPlayers();
         squares = stage.GetSquares();
@@ -18,7 +20,7 @@ public class GameManager
     public IEnumerator GameCoroutine()
     {
         //READY!ボタンが押されるまで待つ
-        yield return null;
+        yield return stage.WaitForGetReady();
 
         /*
         while(ゲーム終了まで){

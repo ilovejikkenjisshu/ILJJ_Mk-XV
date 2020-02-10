@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SimpleStageManager : MonoBehaviour, Stage
 {
+    public GameObject readyPanel;
+
     Player[] Stage.GetPlayers()
     {
         throw new System.NotImplementedException();
@@ -22,9 +25,11 @@ public class SimpleStageManager : MonoBehaviour, Stage
         Debug.Log("Game Initialization finished");
     }
 
-    // Update is called once per frame
-    void Update()
+    public IEnumerator WaitForGetReady()
     {
-        
+        readyPanel.SetActive(true);
+        Button readyButton = readyPanel.transform.GetChild(0).transform.GetComponent<Button>();
+        yield return new WaitForButtonClick(readyButton);
+        readyPanel.SetActive(false);
     }
 }

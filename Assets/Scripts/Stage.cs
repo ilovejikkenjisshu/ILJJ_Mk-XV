@@ -6,4 +6,5 @@ public interface Stage
 {
     Player[] GetPlayers();
     Square[] GetSquares();
+    IEnumerator WaitForGetReady();
 }
