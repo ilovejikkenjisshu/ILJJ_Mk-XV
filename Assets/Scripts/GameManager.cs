@@ -22,7 +22,11 @@ public class GameManager
 
         /*
         while(ゲーム終了まで){
-            
+            プレイヤーごとの処理{
+                サイコロを振ってもらう;
+                行先を選んでもらう(player, dice);
+                行先のマスのイベント;
+            }
         }
         */
     }
