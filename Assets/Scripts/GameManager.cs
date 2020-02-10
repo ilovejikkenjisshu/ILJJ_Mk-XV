@@ -14,4 +14,16 @@ public class GameManager
         squares = stage.GetSquares();
         */
     }
+
+    public IEnumerator GameCoroutine()
+    {
+        //READY!ボタンが押されるまで待つ
+        yield return null;
+
+        /*
+        while(ゲーム終了まで){
+            
+        }
+        */
+    }
 }

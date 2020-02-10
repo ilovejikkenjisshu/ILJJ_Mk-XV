@@ -18,6 +18,8 @@ public class SimpleStageManager : MonoBehaviour, Stage
     void Start()
     {
         GameManager manager = new GameManager(this);
+        manager.GameCoroutine();
+        Debug.Log("Game Initialization finished");
     }
 
     // Update is called once per frame
