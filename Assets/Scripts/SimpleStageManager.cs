@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SimpleStageManager : MonoBehaviour, Stage
 {
+    public GameObject readyPanel;
+
     Player[] Stage.GetPlayers()
     {
         throw new System.NotImplementedException();
@@ -18,11 +21,15 @@ public class SimpleStageManager : MonoBehaviour, Stage
     void Start()
     {
         GameManager manager = new GameManager(this);
+        StartCoroutine(manager.Run());
+        Debug.Log("Game Initialization finished");
     }
 
-    // Update is called once per frame
-    void Update()
+    public IEnumerator WaitForGettingReady()
     {
-        
+        readyPanel.SetActive(true);
+        Button readyButton = readyPanel.transform.GetChild(0).transform.GetComponent<Button>();
+        yield return new WaitForButtonClicked(readyButton);
+        readyPanel.SetActive(false);
     }
 }
