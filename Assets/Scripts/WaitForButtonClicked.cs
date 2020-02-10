@@ -15,11 +15,6 @@ public class WaitForButtonClicked : CustomYieldInstruction
     public WaitForButtonClicked(Button waitButton)
     {
         clicked = false;
-        waitButton.onClick.AddListener(OnClickButton);
-    }
-
-    public void OnClickButton()
-    {
-        clicked = true;
+        waitButton.onClick.AddListener( () => clicked = true );
     }
 }
