@@ -50,19 +50,21 @@ public class SimpleStageManager : MonoBehaviour, Stage
 
     public IEnumerator RollDice()
     {
+        // 初期化処理
+        Text numbertext = rollDicePanel.transform.Find("Number").transform.GetComponent<Text>();
+        numbertext.text = "";
+        Button rollDiceButton = rollDicePanel.transform.Find("Roll Dice Button").transform.GetComponent<Button>();
+        rollDiceButton.gameObject.SetActive(true);
+
         rollDicePanel.SetActive(true);
-        Button rollDiceButton = rollDicePanel.transform.GetChild(0).transform.GetComponent<Button>();
         yield return new WaitForButtonClicked(rollDiceButton);
 
         rollDiceButton.gameObject.SetActive(false);
         int number = Random.Range(0, 6) + 1;
-        Text numbertext = rollDicePanel.transform.Find("Number").transform.GetComponent<Text>();
         numbertext.text = number.ToString();
         yield return new WaitForSeconds(1);
 
         rollDicePanel.SetActive(false);
-        numbertext.text = "";
-        rollDiceButton.gameObject.SetActive(true);
         yield return number;
     }
 }
