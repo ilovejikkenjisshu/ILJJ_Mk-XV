@@ -7,4 +7,5 @@ public interface Stage
     Player[] GetPlayers();
     Square[] GetSquares();
     IEnumerator WaitForGettingReady();
+    IEnumerator RollDice();
 }

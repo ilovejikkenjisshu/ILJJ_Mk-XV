@@ -22,6 +22,11 @@ public class GameManager
         //READY!ボタンが押されるまで待つ
         yield return stage.WaitForGettingReady();
 
+        //サイコロをふるテスト
+        IEnumerator rollDice = stage.RollDice();
+        yield return rollDice;
+        Debug.Log((int)rollDice.Current);
+
         /*
         while(ゲーム終了まで){
             プレイヤーごとの処理{
