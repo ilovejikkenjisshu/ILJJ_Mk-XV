@@ -35,7 +35,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
         players = new Player[playerNum];
         for(int i = 0; i < playerNum; i++)
         {
-            players[i] = Instantiate(playerPrefab);
+            players[i] = (Player) Instantiate(playerPrefab);
         }
     }
 
