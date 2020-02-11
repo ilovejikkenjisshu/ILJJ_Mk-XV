@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class SimpleStageManager : MonoBehaviour, Stage
 {
     public GameObject readyPanel;
+    public GameObject rollDicePanel;
+
     public Player playerPrefab;
 
     private Player[] players;
@@ -45,5 +47,23 @@ public class SimpleStageManager : MonoBehaviour, Stage
         Button readyButton = readyPanel.transform.GetChild(0).transform.GetComponent<Button>();
         yield return new WaitForButtonClicked(readyButton);
         readyPanel.SetActive(false);
+    }
+
+    public IEnumerator RollDice()
+    {
+        rollDicePanel.SetActive(true);
+        Button rollDiceButton = rollDicePanel.transform.GetChild(0).transform.GetComponent<Button>();
+        yield return new WaitForButtonClicked(rollDiceButton);
+
+        rollDiceButton.gameObject.SetActive(false);
+        int number = Random.Range(0, 6) + 1;
+        Text numbertext = rollDicePanel.transform.Find("Number").transform.GetComponent<Text>();
+        numbertext.text = number.ToString();
+        yield return new WaitForSeconds(1);
+
+        rollDicePanel.SetActive(false);
+        numbertext.text = "";
+        rollDiceButton.gameObject.SetActive(true);
+        yield return number;
     }
 }
