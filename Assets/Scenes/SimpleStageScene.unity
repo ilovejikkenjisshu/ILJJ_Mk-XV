@@ -1850,7 +1850,7 @@ PrefabInstance:
     - target: {fileID: 92241820034041347, guid: 8d15e26efed8aca4b8d57a0e8dddb586,
         type: 3}
       propertyPath: nextSquares.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 92241820034041347, guid: 8d15e26efed8aca4b8d57a0e8dddb586,
         type: 3}
