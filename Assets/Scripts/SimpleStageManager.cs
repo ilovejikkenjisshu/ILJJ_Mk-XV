@@ -48,7 +48,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
         readyPanel.SetActive(false);
     }
 
-    public IEnumerator RollDice()
+    public IEnumerator RollDice(int min, int max)
     {
         // 初期化処理
         Text numbertext = rollDicePanel.transform.Find("Number").transform.GetComponent<Text>();
@@ -60,7 +60,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
         yield return new WaitForButtonClicked(rollDiceButton);
 
         rollDiceButton.gameObject.SetActive(false);
-        int number = Random.Range(0, 6) + 1;
+        int number = Random.Range(min, max + 1);
         numbertext.text = number.ToString();
         yield return new WaitForSeconds(1);
 

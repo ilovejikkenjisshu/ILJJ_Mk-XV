@@ -23,7 +23,7 @@ public class GameManager
         yield return stage.WaitForGettingReady();
 
         //サイコロをふるテスト
-        IEnumerator rollDice = stage.RollDice();
+        IEnumerator rollDice = stage.RollDice(1, 6);
         yield return rollDice;
         Debug.Log((int)rollDice.Current);
 
