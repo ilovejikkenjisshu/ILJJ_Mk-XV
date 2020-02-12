@@ -13,7 +13,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
 
     Player[] Stage.GetPlayers()
     {
-        throw new System.NotImplementedException();
+        return players;
     }
 
     Square[] Stage.GetSquares()
