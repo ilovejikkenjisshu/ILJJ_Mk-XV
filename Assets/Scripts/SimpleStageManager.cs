@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
     public Player playerPrefab;
 
     private Player[] players;
+    private Square[] squares;
 
     Player[] Stage.GetPlayers()
     {
@@ -17,13 +19,14 @@ public class SimpleStageManager : MonoBehaviour, Stage
 
     Square[] Stage.GetSquares()
     {
-        throw new System.NotImplementedException();
+        return squares;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         InitPlayers(4);
+        InitSquares();
         GameManager manager = new GameManager(this);
         StartCoroutine(manager.Run());
         Debug.Log("Game Initialization finished");
@@ -36,6 +39,17 @@ public class SimpleStageManager : MonoBehaviour, Stage
         for(int i = 0; i < playerNum; i++)
         {
             players[i] = (Player) Instantiate(playerPrefab);
+        }
+    }
+
+    private void InitSquares()
+    {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Square");
+
+        squares = new Square[objs.GetLength(0)];
+        for (int i = 0; i < objs.GetLength(0); i++)
+        {
+            squares[i] = objs[i].GetComponent<Square>();
         }
     }
 
