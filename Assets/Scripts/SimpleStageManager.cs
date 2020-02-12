@@ -7,6 +7,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
 {
     public GameObject readyPanel;
     public Player playerPrefab;
+    public List<Square> startSquares;
 
     private Player[] players;
 
