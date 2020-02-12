@@ -51,12 +51,14 @@ public class SimpleStageManager : MonoBehaviour, Stage
     public IEnumerator RollDice(int min, int max)
     {
         // 初期化処理
+        Text numbertext = rollDicePanel.transform.Find("Number").transform.GetComponent<Text>();
+        numbertext.text = "";
         Button rollDiceButton = rollDicePanel.transform.Find("Roll Dice Button").transform.GetComponent<Button>();
         rollDiceButton.gameObject.SetActive(true);
 
         rollDicePanel.SetActive(true);
 
-        IEnumerator diceAnimation = PlayDiceAnimation(min,max);
+        IEnumerator diceAnimation = PlayDiceAnimation(min,max,numbertext);
         StartCoroutine(diceAnimation);
         int number;
         yield return new WaitForButtonClicked(rollDiceButton);
@@ -70,10 +72,8 @@ public class SimpleStageManager : MonoBehaviour, Stage
         yield return number;
     }
 
-    private IEnumerator PlayDiceAnimation(int min, int max)
+    private IEnumerator PlayDiceAnimation(int min, int max, Text numbertext)
     {
-        Text numbertext = rollDicePanel.transform.Find("Number").transform.GetComponent<Text>();
-        numbertext.text = "";
         int number;
         while(true){
             number = Random.Range(min, max + 1);
