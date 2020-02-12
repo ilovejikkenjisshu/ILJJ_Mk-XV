@@ -4,9 +4,17 @@ using UnityEngine;
  
 public class Player : MonoBehaviour
 {
-    public string GetName()
+    public string Name { get; set; }
+    private Square pos;
+    public Square Pos
     {
-        return "ILJJ";
+        get { return this.pos; }
+        set
+        {
+            this.pos = value;
+            this.transform.position = value.transform.position;
+            this.transform.Translate(0, 0, -1f);
+        }
     }
 
     // Start is called before the first frame update

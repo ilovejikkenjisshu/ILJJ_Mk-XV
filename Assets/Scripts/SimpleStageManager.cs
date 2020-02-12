@@ -30,13 +30,14 @@ public class SimpleStageManager : MonoBehaviour, Stage
         Debug.Log("Game Initialization finished");
     }
 
-    // 仮に生成しているだけでPlayerに必要な情報は用意されていない
     private void InitPlayers(int playerNum)
     {
         players = new Player[playerNum];
         for(int i = 0; i < playerNum; i++)
         {
             players[i] = (Player) Instantiate(playerPrefab);
+            players[i].Name = "player" + i.ToString();
+            players[i].Pos = startSquares[i % startSquares.Count];
         }
     }
 
