@@ -70,7 +70,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
         yield return number;
     }
 
-    public IEnumerator PlayDiceAnimation(int min, int max)
+    private IEnumerator PlayDiceAnimation(int min, int max)
     {
         Text numbertext = rollDicePanel.transform.Find("Number").transform.GetComponent<Text>();
         numbertext.text = "";
