@@ -83,4 +83,61 @@ public class SimpleStageManager : MonoBehaviour, Stage
         rollDicePanel.SetActive(false);
         yield return number;
     }
+
+    private void GenerateDestTree(List<Node<Square>> destOptions, Node<Square> node, int dicenum, int now = 0)
+    {
+        if (now == dicenum) {
+            destOptions.Add(node);
+            return;
+        }
+        for (int i = 0; i < node.value.GetNext().Count; i++) {
+            // 進んできた方へ戻るマスは除いて木を作る
+            if (node.Parent != null && node.value.GetNext()[i] == node.Parent.value) continue;
+            Node<Square> newnode = new Node<Square>(node.value.GetNext()[i]);
+            node.Add(newnode);
+            GenerateDestTree(destOptions, newnode, dicenum, now + 1);
+        }
+    }
+
+    private IEnumerator SelectDest(Player player, int dicenum)
+    {
+        Node<Square> root = new Node<Square>(player.Pos);
+        // destOptionsは「到着先のマスを指す木の葉ノード」のリスト
+        List<Node<Square>> destOptions = new List<Node<Square>>();
+
+        // 多分木をつくる
+        GenerateDestTree(destOptions, root, dicenum);
+
+        Debug.Log("destOptions: " + destOptions.Count.ToString());
+        // ここでdestOptionsからプレイヤーに行き先を選ばせる
+        // nodeを返してもらう
+        // 注意！到着先は同じだけど辿る道順が異なるものもある
+        //yield return new WaitForDestSelected(destOptions);
+
+        // 選択させるのにいいのがまだ思いついていないのでランダムに選ばせる
+        Node<Square> nodeptr = destOptions[UnityEngine.Random.Range(0, destOptions.Count - 1)];
+
+        // 木を逆に辿りながらstackにpushしていくことで進む道順を作成する
+        Stack<Square> directions = new Stack<Square>();
+        while (nodeptr.Parent != null) {
+            directions.Push(nodeptr.value);
+            nodeptr = nodeptr.Parent;
+        }
+        yield return directions;
+    }
+
+    public IEnumerator MovePlayer(Player player, int dicenum)
+    {
+        // 到着先を選ばせて、道順を返してもらう
+        IEnumerator selectDest = SelectDest(player, dicenum);
+        yield return selectDest;
+
+        // 道順をもとにプレイヤーを歩かせる
+        Stack<Square> directions = (Stack<Square>)selectDest.Current;
+        while (directions.Count > 0) {
+            IEnumerator moveTo = player.MoveTo(directions.Pop());
+            yield return moveTo;
+        }
+        yield return null;
+    }
 }
