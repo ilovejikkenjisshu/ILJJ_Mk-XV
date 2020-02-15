@@ -11,10 +11,8 @@ public class GameManager
     public GameManager(Stage stage)
     {
         this.stage = stage;
-        /*
         players = stage.GetPlayers();
         squares = stage.GetSquares();
-        */
     }
 
     public IEnumerator Run()
@@ -22,19 +20,17 @@ public class GameManager
         //READY!ボタンが押されるまで待つ
         yield return stage.WaitForGettingReady();
 
-        //サイコロをふるテスト
-        IEnumerator rollDice = stage.RollDice(1, 6);
-        yield return rollDice;
-        Debug.Log((int)rollDice.Current);
-
-        /*
-        while(ゲーム終了まで){
-            プレイヤーごとの処理{
-                サイコロを振ってもらう;
-                行先を選んでもらう(player, dice);
-                行先のマスのイベント;
+        while (true) {
+            for (int i = 0; i < players.Length; i++) {
+                Debug.Log("turn: player" + i.ToString());
+                IEnumerator rollDice = stage.RollDice(1, 6);
+                yield return rollDice;
+                int dicenum = (int)rollDice.Current;
+                Debug.Log("dicenum: " + dicenum);
+                IEnumerator movePlayer = stage.MovePlayer(players[i], dicenum);
+                yield return movePlayer;
+                //行先のマスのイベント;
             }
         }
-        */
     }
 }
