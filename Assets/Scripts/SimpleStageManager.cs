@@ -76,7 +76,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
         yield return new WaitForButtonClicked(rollDiceButton);
 
         rollDiceButton.gameObject.SetActive(false);
-        int number = Random.Range(min, max + 1);
+        int number = UnityEngine.Random.Range(min, max + 1);
         numbertext.text = number.ToString();
         yield return new WaitForSeconds(1);
 
