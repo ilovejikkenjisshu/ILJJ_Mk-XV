@@ -9,13 +9,14 @@ public class SimpleStageManager : MonoBehaviour, Stage
     public GameObject readyPanel;
     public GameObject rollDicePanel;
     public Player playerPrefab;
+    public List<Square> startSquares;
 
     private Player[] players;
     private Square[] squares;
 
     Player[] Stage.GetPlayers()
     {
-        throw new System.NotImplementedException();
+        return players;
     }
 
     Square[] Stage.GetSquares()
@@ -33,13 +34,14 @@ public class SimpleStageManager : MonoBehaviour, Stage
         Debug.Log("Game Initialization finished");
     }
 
-    // 仮に生成しているだけでPlayerに必要な情報は用意されていない
     private void InitPlayers(int playerNum)
     {
         players = new Player[playerNum];
         for(int i = 0; i < playerNum; i++)
         {
             players[i] = (Player) Instantiate(playerPrefab);
+            players[i].Name = "player" + i.ToString();
+            players[i].Pos = startSquares[i % startSquares.Count];
         }
     }
 

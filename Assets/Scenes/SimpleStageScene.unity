@@ -3288,6 +3288,11 @@ MonoBehaviour:
   rollDicePanel: {fileID: 1798825663}
   playerPrefab: {fileID: 1830993332199348081, guid: d427f76ced50ebf43add7ea988b1d6ce,
     type: 3}
+  startSquares:
+  - {fileID: 1447418520}
+  - {fileID: 1498321895}
+  - {fileID: 714377352}
+  - {fileID: 1651656893}
 --- !u!4 &1274903874
 Transform:
   m_ObjectHideFlags: 0
