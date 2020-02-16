@@ -60,10 +60,9 @@ public class SimpleStageManager : MonoBehaviour, Stage
 
         IEnumerator diceAnimation = PlayDiceAnimation(min,max,numbertext);
         StartCoroutine(diceAnimation);
-        int number;
         yield return new WaitForButtonClicked(rollDiceButton);
         StopCoroutine(diceAnimation);
-        number = (int)diceAnimation.Current;
+        int number = (int)diceAnimation.Current;
 
         rollDiceButton.gameObject.SetActive(false);
         yield return new WaitForSeconds(1);
