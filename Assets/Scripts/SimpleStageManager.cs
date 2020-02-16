@@ -87,6 +87,9 @@ public class SimpleStageManager : MonoBehaviour, Stage
     private void GenerateDestTree(List<TreeNode<Square>> destOptions, TreeNode<Square> node, int dicenum, int now = 0)
     {
         if (now == dicenum) {
+            foreach (TreeNode<Square> value in destOptions) {
+                if (node.value == value.value) return;
+            }
             destOptions.Add(node);
             return;
         }
