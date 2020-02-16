@@ -13,15 +13,15 @@ public class SimpleStageManager : MonoBehaviour, Stage
     public List<Square> startSquares;
     public DestSelector destSelectorPrefab;
 
-    private Player[] players;
-    private Square[] squares;
+    private List<Player> players;
+    private List<Square> squares;
 
-    Player[] Stage.GetPlayers()
+    List<Player> Stage.GetPlayers()
     {
         return players;
     }
 
-    Square[] Stage.GetSquares()
+    List<Square> Stage.GetSquares()
     {
         return squares;
     }
@@ -38,10 +38,10 @@ public class SimpleStageManager : MonoBehaviour, Stage
 
     private void InitPlayers(int playerNum)
     {
-        players = new Player[playerNum];
+        players = new List<Player>(playerNum);
         for(int i = 0; i < playerNum; i++)
         {
-            players[i] = (Player) Instantiate(playerPrefab);
+            players.Add((Player) Instantiate(playerPrefab));
             players[i].Name = "player" + i.ToString();
             players[i].Pos = startSquares[i % startSquares.Count];
         }
@@ -51,10 +51,10 @@ public class SimpleStageManager : MonoBehaviour, Stage
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Square");
 
-        squares = new Square[objs.GetLength(0)];
+        squares = new List<Square>(objs.GetLength(0));
         for (int i = 0; i < objs.GetLength(0); i++)
         {
-            squares[i] = objs[i].GetComponent<Square>();
+            squares.Add(objs[i].GetComponent<Square>());
         }
     }
 
