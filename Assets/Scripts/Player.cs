@@ -12,17 +12,18 @@ public class Player : MonoBehaviour
         set
         {
             this.pos = value;
-            Vector3 pos = value.transform.position;
+            Vector3 pos = value.transform.position + this.PosOffset;
             pos.z = -1f;
             this.transform.position = pos;
         }
     }
+    public Vector3 PosOffset { get; set; }
 
     public IEnumerator MoveTo(Square to)
     {
         Vector3 start = this.transform.position;
-        float diffx = to.transform.position.x - this.transform.position.x;
-        float diffy = to.transform.position.y - this.transform.position.y;
+        float diffx = to.transform.position.x + this.PosOffset.x - this.transform.position.x;
+        float diffy = to.transform.position.y + this.PosOffset.y - this.transform.position.y;
 
         const int animationFrames = 15;
 
