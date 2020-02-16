@@ -24,14 +24,17 @@ public class GameManager
             for (int i = 0; i < players.Count; i++) {
                 Debug.Log("turn: player" + i.ToString());
                 stage.MoveCamera(players[i].transform.position);
+                //dice roll
                 IEnumerator rollDice = stage.RollDice(1, 6);
                 yield return rollDice;
                 int dicenum = (int)rollDice.Current;
                 Debug.Log("dicenum: " + dicenum);
+                //player move
                 IEnumerator movePlayer = stage.MovePlayer(players[i], dicenum);
                 yield return movePlayer;
                 //行先のマスのイベント;
-                players[i].Pos.execEvent();
+                IEnumerator squareEvent = players[i].Pos.execEvent(stage,i);
+                yield return squareEvent;
             }
         }
     }

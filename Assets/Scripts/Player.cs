@@ -18,6 +18,15 @@ public class Player : MonoBehaviour
         }
     }
 
+    public Player Pair
+    {
+        get { return this.pair; }
+        set
+        {
+            this.pair = value;
+        }
+    }
+
     public IEnumerator MoveTo(Square to)
     {
         yield return new WaitForSeconds(0.25f);

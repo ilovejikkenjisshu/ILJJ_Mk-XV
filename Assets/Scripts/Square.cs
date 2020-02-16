@@ -25,8 +25,8 @@ public abstract class Square : MonoBehaviour
         GenerateGuideArrow();
     }
 
-    public virtual void execEvent()
+    public virtual IEnumerator execEvent(Stage stage,int playerNum)
     {
-
+        yield return null;
     }
 }
