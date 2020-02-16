@@ -15,6 +15,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
 
     private Player[] players;
     private Square[] squares;
+    private Camera cam;
 
     Player[] Stage.GetPlayers()
     {
@@ -31,6 +32,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
     {
         InitPlayers(4);
         InitSquares();
+        cam = Camera.main;
         GameManager manager = new GameManager(this);
         StartCoroutine(manager.Run());
         Debug.Log("Game Initialization finished");
@@ -159,12 +161,15 @@ public class SimpleStageManager : MonoBehaviour, Stage
         IEnumerator selectDest = SelectDest(player, dicenum);
         yield return selectDest;
 
+        Coroutine camMove = StartCoroutine(RunCameraTrackPlayer(player));
         // 道順をもとにプレイヤーを歩かせる
         Stack<Square> directions = (Stack<Square>)selectDest.Current;
         while (directions.Count > 0) {
             IEnumerator moveTo = player.MoveTo(directions.Pop());
             yield return moveTo;
         }
+        StopCoroutine(camMove);
+
         yield return null;
     }
 
@@ -175,6 +180,19 @@ public class SimpleStageManager : MonoBehaviour, Stage
             number = UnityEngine.Random.Range(min, max + 1);
             numbertext.text = number.ToString();
             yield return number;
+        }
+    }
+
+    public void MoveCamera(Vector3 pos)
+    {
+        cam.transform.position = new Vector3(pos.x,pos.y,-10);
+    }
+
+    private IEnumerator RunCameraTrackPlayer(Player player)
+    {
+        while(true){
+            MoveCamera(player.transform.position);
+            yield return null;
         }
     }
 }

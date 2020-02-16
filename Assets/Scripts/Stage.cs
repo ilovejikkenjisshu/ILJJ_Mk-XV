@@ -9,4 +9,5 @@ public interface Stage
     IEnumerator WaitForGettingReady();
     IEnumerator RollDice(int min, int max);
     IEnumerator MovePlayer(Player player, int dicenum);
+    void MoveCamera(Vector3 pos);
 }
