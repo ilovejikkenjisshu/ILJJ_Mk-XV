@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class SimpleStageManager : MonoBehaviour, Stage
 {
@@ -10,6 +11,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
     public GameObject rollDicePanel;
     public Player playerPrefab;
     public List<Square> startSquares;
+    public DestSelector destSelectorPrefab;
 
     private Player[] players;
     private Square[] squares;
@@ -105,6 +107,11 @@ public class SimpleStageManager : MonoBehaviour, Stage
         }
     }
 
+    [System.Serializable]
+    public class DestSelectEvent : UnityEvent<TreeNode<Square>>
+    {
+    }
+
     private IEnumerator SelectDest(Player player, int dicenum)
     {
         TreeNode<Square> root = new TreeNode<Square>(player.Pos);
@@ -114,14 +121,28 @@ public class SimpleStageManager : MonoBehaviour, Stage
         // 多分木をつくる
         GenerateDestTree(destOptions, root, dicenum);
 
-        Debug.Log("destOptions: " + destOptions.Count.ToString());
         // ここでdestOptionsからプレイヤーに行き先を選ばせる
-        // nodeを返してもらう
-        // 注意！到着先は同じだけど辿る道順が異なるものもある
-        //yield return new WaitForDestSelected(destOptions);
+        DestSelectEvent OnDestSelected = new DestSelectEvent();
+        TreeNode<Square> nodeptr = null;
+        bool selected = false;
+        OnDestSelected.AddListener((TreeNode<Square> dest) => {
+            nodeptr = dest;
+            selected = true;
+        });
 
-        // 選択させるのにいいのがまだ思いついていないのでランダムに選ばせる
-        TreeNode<Square> nodeptr = destOptions[UnityEngine.Random.Range(0, destOptions.Count - 1)];
+        // DestSelectorを生成
+        List<DestSelector> destSelectors = new List<DestSelector>();
+        foreach (TreeNode<Square> dest in destOptions)
+        {
+            DestSelector temp = (DestSelector) Instantiate(destSelectorPrefab);
+            temp.transform.position = dest.value.transform.position;
+            temp.transform.Translate(0, 0, -2f);
+            temp.dest = dest;
+            temp.OnDestSelected = OnDestSelected;
+            destSelectors.Add(temp);
+        }
+        while (!selected) yield return null;
+        foreach (DestSelector ds in destSelectors) Destroy(ds.gameObject);
 
         // 木を逆に辿りながらstackにpushしていくことで進む道順を作成する
         Stack<Square> directions = new Stack<Square>();
