@@ -8,4 +8,5 @@ public interface Stage
     Square[] GetSquares();
     IEnumerator WaitForGettingReady();
     IEnumerator RollDice(int min, int max);
+    IEnumerator MovePlayer(Player player, int dicenum);
 }

@@ -17,6 +17,17 @@ public class Player : MonoBehaviour
         }
     }
 
+    public IEnumerator MoveTo(Square to)
+    {
+        yield return new WaitForSeconds(0.25f);
+        float diffx = to.transform.position.x - this.transform.position.x;
+        float diffy = to.transform.position.y - this.transform.position.y;
+        this.transform.Translate(diffx / 2, diffy / 2, 0);
+        yield return new WaitForSeconds(0.25f);
+        this.Pos = to;
+        yield return null;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
