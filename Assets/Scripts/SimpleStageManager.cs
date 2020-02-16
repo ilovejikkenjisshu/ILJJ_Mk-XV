@@ -41,16 +41,20 @@ public class SimpleStageManager : MonoBehaviour, Stage
 
     private void InitPlayers(int playerNum)
     {
-        Color[] colors = new Color[4] { Color.blue, Color.green, Color.red, Color.yellow };
-        int[,] forOffset = new int[,] { { -1, -1 }, { -1, 1 }, { 1, -1 }, { 1, 1 } };
+        Color[] colors = new Color[] { Color.blue, Color.green, Color.red, Color.yellow, Color.cyan, Color.gray, Color.magenta, Color.black, Color.white };
+        const float offset = 0.1f;
         players = new List<Player>(playerNum);
         for(int i = 0; i < playerNum; i++)
         {
             players.Add((Player) Instantiate(playerPrefab));
             players[i].Name = "player" + i.ToString();
-            players[i].PosOffset = new Vector3(0.1f * forOffset[i % 4, 0], 0.1f * forOffset[i % 4, 1], 0f);
+            players[i].PosOffset = new Vector3(
+                offset * Mathf.Sin(2 * Mathf.PI / playerNum * i - Mathf.PI / 4),
+                offset * Mathf.Cos(2 * Mathf.PI / playerNum * i - Mathf.PI / 4),
+                0f
+            );
             players[i].Pos = startSquares[i % startSquares.Count];
-            players[i].GetComponent<Renderer>().material.color = colors[i % 4];
+            players[i].GetComponent<Renderer>().material.color = colors[i % colors.Length];
         }
     }
 
