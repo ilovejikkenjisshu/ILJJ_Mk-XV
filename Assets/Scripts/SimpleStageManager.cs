@@ -136,7 +136,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
         {
             DestSelector temp = (DestSelector) Instantiate(destSelectorPrefab);
             temp.transform.position = dest.value.transform.position;
-            temp.transform.Translate(0, 0, -2f);
+            temp.transform.Translate(0, 0, -1f);
             temp.dest = dest;
             temp.OnDestSelected = OnDestSelected;
             destSelectors.Add(temp);
