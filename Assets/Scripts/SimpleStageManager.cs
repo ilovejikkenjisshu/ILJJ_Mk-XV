@@ -84,7 +84,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
         yield return number;
     }
 
-    private void GenerateDestTree(List<Node<Square>> destOptions, Node<Square> node, int dicenum, int now = 0)
+    private void GenerateDestTree(List<TreeNode<Square>> destOptions, TreeNode<Square> node, int dicenum, int now = 0)
     {
         if (now == dicenum) {
             destOptions.Add(node);
@@ -93,7 +93,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
         for (int i = 0; i < node.value.GetNext().Count; i++) {
             // 進んできた方へ戻るマスは除いて木を作る
             if (node.Parent != null && node.value.GetNext()[i] == node.Parent.value) continue;
-            Node<Square> newnode = new Node<Square>(node.value.GetNext()[i]);
+            TreeNode<Square> newnode = new TreeNode<Square>(node.value.GetNext()[i]);
             node.Add(newnode);
             GenerateDestTree(destOptions, newnode, dicenum, now + 1);
         }
@@ -101,9 +101,9 @@ public class SimpleStageManager : MonoBehaviour, Stage
 
     private IEnumerator SelectDest(Player player, int dicenum)
     {
-        Node<Square> root = new Node<Square>(player.Pos);
+        TreeNode<Square> root = new TreeNode<Square>(player.Pos);
         // destOptionsは「到着先のマスを指す木の葉ノード」のリスト
-        List<Node<Square>> destOptions = new List<Node<Square>>();
+        List<TreeNode<Square>> destOptions = new List<TreeNode<Square>>();
 
         // 多分木をつくる
         GenerateDestTree(destOptions, root, dicenum);
@@ -115,7 +115,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
         //yield return new WaitForDestSelected(destOptions);
 
         // 選択させるのにいいのがまだ思いついていないのでランダムに選ばせる
-        Node<Square> nodeptr = destOptions[UnityEngine.Random.Range(0, destOptions.Count - 1)];
+        TreeNode<Square> nodeptr = destOptions[UnityEngine.Random.Range(0, destOptions.Count - 1)];
 
         // 木を逆に辿りながらstackにpushしていくことで進む道順を作成する
         Stack<Square> directions = new Stack<Square>();
