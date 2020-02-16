@@ -73,14 +73,27 @@ public class SimpleStageManager : MonoBehaviour, Stage
         rollDiceButton.gameObject.SetActive(true);
 
         rollDicePanel.SetActive(true);
+
+        IEnumerator diceAnimation = PlayDiceAnimation(min,max,numbertext);
+        StartCoroutine(diceAnimation);
         yield return new WaitForButtonClicked(rollDiceButton);
+        StopCoroutine(diceAnimation);
+        int number = (int)diceAnimation.Current;
 
         rollDiceButton.gameObject.SetActive(false);
-        int number = Random.Range(min, max + 1);
-        numbertext.text = number.ToString();
         yield return new WaitForSeconds(1);
 
         rollDicePanel.SetActive(false);
         yield return number;
+    }
+
+    private IEnumerator PlayDiceAnimation(int min, int max, Text numbertext)
+    {
+        int number;
+        while(true){
+            number = Random.Range(min, max + 1);
+            numbertext.text = number.ToString();
+            yield return number;
+        }
     }
 }
