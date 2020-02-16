@@ -4,9 +4,10 @@ using UnityEngine;
 
 public interface Stage
 {
-    Player[] GetPlayers();
-    Square[] GetSquares();
+    List<Player> GetPlayers();
+    List<Square> GetSquares();
     IEnumerator WaitForGettingReady();
     IEnumerator RollDice(int min, int max);
     IEnumerator MovePlayer(Player player, int dicenum);
+    void MoveCamera(Vector3 pos);
 }

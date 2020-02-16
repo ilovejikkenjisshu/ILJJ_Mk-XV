@@ -13,15 +13,17 @@ public class SimpleStageManager : MonoBehaviour, Stage
     public List<Square> startSquares;
     public DestSelector destSelectorPrefab;
 
-    private Player[] players;
-    private Square[] squares;
+    private List<Player> players;
+    private List<Square> squares;
 
-    Player[] Stage.GetPlayers()
+    private Camera cam;
+
+    List<Player> Stage.GetPlayers()
     {
         return players;
     }
 
-    Square[] Stage.GetSquares()
+    List<Square> Stage.GetSquares()
     {
         return squares;
     }
@@ -31,6 +33,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
     {
         InitPlayers(4);
         InitSquares();
+        cam = Camera.main;
         GameManager manager = new GameManager(this);
         StartCoroutine(manager.Run());
         Debug.Log("Game Initialization finished");
@@ -38,10 +41,10 @@ public class SimpleStageManager : MonoBehaviour, Stage
 
     private void InitPlayers(int playerNum)
     {
-        players = new Player[playerNum];
+        players = new List<Player>(playerNum);
         for(int i = 0; i < playerNum; i++)
         {
-            players[i] = (Player) Instantiate(playerPrefab);
+            players.Add((Player) Instantiate(playerPrefab));
             players[i].Name = "player" + i.ToString();
             players[i].Pos = startSquares[i % startSquares.Count];
         }
@@ -51,10 +54,10 @@ public class SimpleStageManager : MonoBehaviour, Stage
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Square");
 
-        squares = new Square[objs.GetLength(0)];
+        squares = new List<Square>(objs.GetLength(0));
         for (int i = 0; i < objs.GetLength(0); i++)
         {
-            squares[i] = objs[i].GetComponent<Square>();
+            squares.Add(objs[i].GetComponent<Square>());
         }
     }
 
@@ -136,7 +139,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
         {
             DestSelector temp = (DestSelector) Instantiate(destSelectorPrefab);
             temp.transform.position = dest.value.transform.position;
-            temp.transform.Translate(0, 0, -2f);
+            temp.transform.Translate(0, 0, -1f);
             temp.dest = dest;
             temp.OnDestSelected = OnDestSelected;
             destSelectors.Add(temp);
@@ -159,12 +162,15 @@ public class SimpleStageManager : MonoBehaviour, Stage
         IEnumerator selectDest = SelectDest(player, dicenum);
         yield return selectDest;
 
+        Coroutine camMove = StartCoroutine(RunCameraTrackPlayer(player));
         // 道順をもとにプレイヤーを歩かせる
         Stack<Square> directions = (Stack<Square>)selectDest.Current;
         while (directions.Count > 0) {
             IEnumerator moveTo = player.MoveTo(directions.Pop());
             yield return moveTo;
         }
+        StopCoroutine(camMove);
+
         yield return null;
     }
 
@@ -175,6 +181,19 @@ public class SimpleStageManager : MonoBehaviour, Stage
             number = UnityEngine.Random.Range(min, max + 1);
             numbertext.text = number.ToString();
             yield return number;
+        }
+    }
+
+    public void MoveCamera(Vector3 pos)
+    {
+        cam.transform.position = new Vector3(pos.x,pos.y,-10);
+    }
+
+    private IEnumerator RunCameraTrackPlayer(Player player)
+    {
+        while(true){
+            MoveCamera(player.transform.position);
+            yield return null;
         }
     }
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameManager
 {
-    private Player[] players;
-    private Square[] squares;
+    private List<Player> players;
+    private List<Square> squares;
     private Stage stage;
 
     public GameManager(Stage stage)
@@ -21,8 +21,9 @@ public class GameManager
         yield return stage.WaitForGettingReady();
 
         while (true) {
-            for (int i = 0; i < players.Length; i++) {
+            for (int i = 0; i < players.Count; i++) {
                 Debug.Log("turn: player" + i.ToString());
+                stage.MoveCamera(players[i].transform.position);
                 IEnumerator rollDice = stage.RollDice(1, 6);
                 yield return rollDice;
                 int dicenum = (int)rollDice.Current;
