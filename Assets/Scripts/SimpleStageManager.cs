@@ -41,12 +41,14 @@ public class SimpleStageManager : MonoBehaviour, Stage
 
     private void InitPlayers(int playerNum)
     {
+        Color[] colors = new Color[4] { Color.blue, Color.green, Color.red, Color.yellow };
         players = new List<Player>(playerNum);
         for(int i = 0; i < playerNum; i++)
         {
             players.Add((Player) Instantiate(playerPrefab));
             players[i].Name = "player" + i.ToString();
             players[i].Pos = startSquares[i % startSquares.Count];
+            players[i].GetComponent<Renderer>().material.color = colors[i % 4];
         }
     }
 
