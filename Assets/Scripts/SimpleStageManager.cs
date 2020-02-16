@@ -145,6 +145,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
             yield return moveTo;
         }
         yield return null;
+    }
 
     private IEnumerator PlayDiceAnimation(int min, int max, Text numbertext)
     {
