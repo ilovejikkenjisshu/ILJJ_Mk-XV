@@ -3293,6 +3293,8 @@ MonoBehaviour:
   - {fileID: 1498321895}
   - {fileID: 714377352}
   - {fileID: 1651656893}
+  destSelectorPrefab: {fileID: -5598017788421419132, guid: fd40dca91e365516592b1b5f01be2ea1,
+    type: 3}
 --- !u!4 &1274903874
 Transform:
   m_ObjectHideFlags: 0
