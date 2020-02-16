@@ -151,7 +151,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
     {
         int number;
         while(true){
-            number = Random.Range(min, max + 1);
+            number = UnityEngine.Random.Range(min, max + 1);
             numbertext.text = number.ToString();
             yield return number;
         }
