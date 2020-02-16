@@ -16,6 +16,8 @@ public class SimpleStageManager : MonoBehaviour, Stage
     private List<Player> players;
     private List<Square> squares;
 
+    private Camera cam;
+
     List<Player> Stage.GetPlayers()
     {
         return players;
