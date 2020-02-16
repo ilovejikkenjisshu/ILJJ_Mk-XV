@@ -31,6 +31,7 @@ public class GameManager
                 IEnumerator movePlayer = stage.MovePlayer(players[i], dicenum);
                 yield return movePlayer;
                 //行先のマスのイベント;
+                players[i].Pos.execEvent();
             }
         }
     }

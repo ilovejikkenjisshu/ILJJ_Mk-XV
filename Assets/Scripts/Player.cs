@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     public string Name { get; set; }
     private Square pos;
+    private Player pair;
     public Square Pos
     {
         get { return this.pos; }
@@ -32,6 +33,7 @@ public class Player : MonoBehaviour
     void Start()
     {
     //    GameManager manager = new GameManager(this);
+        pair = null;
     }
 
     // Update is called once per frame
