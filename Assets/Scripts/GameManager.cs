@@ -30,6 +30,7 @@ public class GameManager
                 yield return rollDice;
                 int dicenum = (int)rollDice.Current;
                 Debug.Log("dicenum: " + dicenum);
+
                 //player move
                 IEnumerator movePlayer = stage.MovePlayer(players[i], dicenum);
                 yield return movePlayer;
