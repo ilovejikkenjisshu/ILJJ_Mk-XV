@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 92241820034041345}
   - component: {fileID: 92241820034041350}
   - component: {fileID: 92241820034041351}
-  - component: {fileID: 92241820034041347}
+  - component: {fileID: -6756281162138790944}
   m_Layer: 0
-  m_Name: NormalSquare
+  m_Name: SINJUUSquare
   m_TagString: Square
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1b99c2755eb21ad4fbf9ec3b06238e33, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -93,7 +93,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &92241820034041347
+--- !u!114 &-6756281162138790944
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 92241820034041348}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6382a0c2320274a93a9c70f3acad5466, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f735af7a0272ba448dcb5d97b10f217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   guideArrow: {fileID: 1957348707440546336, guid: e73c983b69a974746a26edb83a1cbc08,

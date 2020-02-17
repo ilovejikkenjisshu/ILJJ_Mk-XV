@@ -9,6 +9,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
 {
     public GameObject readyPanel;
     public GameObject rollDicePanel;
+    public GameObject SINJUUPanel;
     public Player playerPrefab;
     public List<Square> startSquares;
     public DestSelector destSelectorPrefab;
@@ -203,5 +204,9 @@ public class SimpleStageManager : MonoBehaviour, Stage
             MoveCamera(player.transform.position);
             yield return null;
         }
+    }
+
+    public void EndGame(){
+        SINJUUPanel.SetActive(true);
     }
 }

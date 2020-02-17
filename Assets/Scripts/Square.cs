@@ -5,7 +5,11 @@ using UnityEngine;
 public abstract class Square : MonoBehaviour
 {
     public GameObject guideArrow;
-    public abstract List<Square> GetNext();
+    public List<Square> nextSquares;
+    public List<Square> GetNext()
+    {
+        return nextSquares;
+    }
     private void GenerateGuideArrow()
     {
         foreach(Square sqr in GetNext())
@@ -19,5 +23,10 @@ public abstract class Square : MonoBehaviour
     protected virtual void Start()
     {
         GenerateGuideArrow();
+    }
+
+    public virtual IEnumerator execEvent(Stage stage,int playerNum)
+    {
+        yield return null;
     }
 }
