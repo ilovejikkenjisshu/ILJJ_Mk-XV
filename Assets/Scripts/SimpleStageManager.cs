@@ -167,9 +167,7 @@ public class SimpleStageManager : MonoBehaviour, Stage
         // 道順をもとにプレイヤーを歩かせる
         Stack<Square> directions = (Stack<Square>)selectDest.Current;
         while (directions.Count > 0) {
-            Square direction = directions.Pop();
-            IEnumerator moveTo = player.MoveTo(direction);
-            player.Pos = direction;
+            IEnumerator moveTo = player.MoveTo(directions.Pop());
             yield return moveTo;
         }
         StopCoroutine(camMove);
