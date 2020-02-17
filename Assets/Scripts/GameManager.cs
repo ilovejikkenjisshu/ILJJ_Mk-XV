@@ -24,6 +24,7 @@ public class GameManager
             for (int i = 0; i < players.Count; i++) {
                 Debug.Log("turn: player" + i.ToString());
                 stage.MoveCamera(players[i].transform.position);
+
                 //dice roll
                 IEnumerator rollDice = stage.RollDice(1, 6);
                 yield return rollDice;
