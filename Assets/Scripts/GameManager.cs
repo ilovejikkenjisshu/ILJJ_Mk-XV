@@ -34,6 +34,7 @@ public class GameManager
                 //player move
                 IEnumerator movePlayer = stage.MovePlayer(players[i], dicenum);
                 yield return movePlayer;
+
                 //行先のマスのイベント;
                 IEnumerator squareEvent = players[i].Pos.execEvent(stage,i);
                 yield return squareEvent;
